@@ -12,7 +12,7 @@ Give a short and brief overview of what your project is about. What needs to be 
     Short project overview
     How much time it might take to do (approximation)
 
-Objective
+## Objective
 
 Describe why you have chosen to build this specific device. What purpose does it serve? What do you want to do with the data, and what new insights do you think it will give?
 
@@ -20,7 +20,7 @@ Describe why you have chosen to build this specific device. What purpose does it
     What purpose does it serve
     What insights you think it will give
 
-Material
+## Material
 
 Explain all material that is needed. All sensors, where you bought them and their specifications. Please also provide pictures of what you have bought and what you are using.
 
@@ -37,7 +37,7 @@ Explain all material that is needed. All sensors, where you bought them and thei
 
     LoPy! Fig. 1. LoPy4 with headers. Pycom.io
 
-Computer setup
+## Computer setup
 
 How is the device programmed. Which IDE are you using. Describe all steps from flashing the firmware, installing plugins in your favorite editor. How flashing is done on MicroPython. The aim is that a beginner should be able to understand.
 
@@ -45,14 +45,14 @@ How is the device programmed. Which IDE are you using. Describe all steps from f
     How the code is uploaded
     Steps that you needed to do for your computer. Installation of Node.js, extra drivers, etc.
 
-Putting everything together
+## Putting everything together
 
 How is all the electronics connected? Describe all the wiring, good if you can show a circuit diagram. Be specific on how to connect everything, and what to think of in terms of resistors, current and voltage. Is this only for a development setup or could it be used in production?
 
     Circuit diagram (can be hand drawn)
     *Electrical calculations
 
-Platform
+## Platform
 
 Describe your choice of platform. If you have tried different platforms it can be good to provide a comparison.
 
@@ -61,7 +61,7 @@ Is your platform based on a local installation or a cloud? Do you plan to use a 
     Describe platform in terms of functionality
     *Explain and elaborate what made you choose this platform
 
-The code
+## The code
 
 Import core functions of your code here, and don’t forget to explain what you have done! Do not put too much code here, focus on the core functionalities. Have you done a specific function that does a calculation, or are you using clever function for sending data on two networks? Or, are you checking if the value is reasonable etc. Explain what you have done, including the setup of the network, wireless, libraries and all that is needed to understand.
 
@@ -72,7 +72,7 @@ def my_cool_function():
 
 s.send(package)
 
-# Explain your code!
+## Explain your code!
 
 Transmitting the data / connectivity
 
@@ -83,7 +83,7 @@ How is the data transmitted to the internet or local server? Describe the packag
     Which transport protocols were used (MQTT, webhook, etc …)
     *Elaborate on the design choices regarding data transmission and wireless protocols. That is how your choices affect the device range and battery consumption.
 
-##Presenting the data
+## Presenting the data
 
 Describe the presentation part. How is the dashboard built? How long is the data preserved in the database?
 
@@ -92,4 +92,4 @@ Describe the presentation part. How is the dashboard built? How long is the data
     *Explain your choice of database.
     *Automation/triggers of the data.
 
-##Finalizing the design
+## Finalizing the design
