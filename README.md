@@ -42,7 +42,7 @@ I used Windows 11 for development in this course and did not have to install any
 ## Putting everything together
 Connect VCC to 3.3v and GND to GND, and the data pin to an analog pin on the ESP-32 (I used pin 32 and 34).
 
-![](images\diagram.png "")
+![](images\diagram.png)
 
 ## Platform
 
