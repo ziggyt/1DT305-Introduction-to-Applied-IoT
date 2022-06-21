@@ -41,9 +41,7 @@ I used Windows 11 for development in this course and did not have to install any
 
 ## Putting everything together
 Connect VCC to 3.3v and GND to GND, and the data pin to an analog pin on the ESP-32 (I used pin 32 and 34).
-
-![](images/diagram.png)
-
+ <img src="images/diagram.png" width="500" height="500"/>
 ## Platform
 
 I opted for the Adafruit IO platform, as it was free, easy to set up, and had all the features I needed for the project.
