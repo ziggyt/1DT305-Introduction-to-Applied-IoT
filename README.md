@@ -15,37 +15,35 @@ If data is logged long term-ish, it can give the user a rough idea of the UV exp
 
 ## Material
 
-
-![UV Sensor](https://ae01.alicdn.com/kf/Hbe0827ec3e64449ead881933f4f7315eC/Original-assembly-GUVA-S12SD-UV-Detection-Sensor-Module-Light-Sensor-240nm-370nm-for-arduino.jpg_Q90.jpg_.wep)
-
-![](https://ae01.alicdn.com/kf/S29fbf11c82d64ecba0d72889f196c663o/New-version-ESP32-Development-Board-CH9102X-WiFi-Bluetooth-Ultra-Low-Power-Consumption-Dual-Core-ESP-32.jpg_Q90.jpg "")
 #### BOM
 1pc ESP-32 Microcontroller (CH9102X version) 45 SEK including shipping https://www.aliexpress.com/item/1005002410521023.html
+  <img src="https://ae01.alicdn.com/kf/S29fbf11c82d64ecba0d72889f196c663o/New-version-ESP32-Development-Board-CH9102X-WiFi-Bluetooth-Ultra-Low-Power-Consumption-Dual-Core-ESP-32.jpg_Q90.jpg" width="400" height="400"/>
 2pc GUVA-S12SD UV Sensors (or alternative UV-sensors) 25 SEK EA https://www.aliexpress.com/item/1005002496494554.html
+  <img src="https://ae01.alicdn.com/kf/Hbe0827ec3e64449ead881933f4f7315eC/Original-assembly-GUVA-S12SD-UV-Detection-Sensor-Module-Light-Sensor-240nm-370nm-for-arduino.jpg_Q90.jpg" width="400" height="400"/>
 Assorted lengths of wire (or dupont cables) 40 SEK https://www.aliexpress.com/item/4000203371860.html
+  <img src="https://ae01.alicdn.com/kf/Ha9b5a8b365a14428ac40f4ba12868260u/40-120pcs-Dupont-Line-10CM-40Pin-Male-to-Male-Male-to-Female-and-Female-to-Female.jpg_640x640.jpg" width="400" height="400"/>
+  
 
-Optional
-3D printing filament (I used esun PLA)
+##### Optional
+3D printing filament (I used esun PLA) https://www.amazon.se/eSUN-3D-skrivarfilament-Dimensionell-Noggrannhet-3D-tryckmaterial/dp/B07FQ98RNP/?th=1
 
 ## Computer setup
 
-I chose PyCharm as I have previous experience with the IDE, and it is free with a student license. To facilitate development with MicroPython I installed a plugin which makes it easy to flash the files.
+I chose PyCharm as I have previous experience with this IDE, and it is free with a student license. To facilitate development with MicroPython I installed a plugin which makes it easy to flash the files.
+[Link to plugin and usage images](https://plugins.jetbrains.com/plugin/9777-micropython)
 
-I used Windows for development in this course and did not have to install any extra drivers.
+I used Windows 11 for development in this course and did not have to install any extra drivers.
 
 ## Putting everything together
-Connect VCC to 3.3v and GND to GND, and the data pin to an analog pin on the ESP-32 (I used pin 32 and 34)
+Connect VCC to 3.3v and GND to GND, and the data pin to an analog pin on the ESP-32 (I used pin 32 and 34).
+
+![](images\diagram.png "")
 
 ## Platform
 
 I opted for the Adafruit IO platform, as it was free, easy to set up, and had all the features I needed for the project.
 
 I looked at PyBites but as I'm not using a PyCom device, I did not see any added value from using their platform over Adafruits.
-
-  <img src="https://ae01.alicdn.com/kf/Ha9b5a8b365a14428ac40f4ba12868260u/40-120pcs-Dupont-Line-10CM-40Pin-Male-to-Male-Male-to-Female-and-Female-to-Female.jpg_640x640.jpg" width="200" height="200"/>
-  
- 
-  
 
 ## The code
 
@@ -86,6 +84,7 @@ The sensors are then read (they are in fact connected to the analog pins, and re
 
 
 The UV sensors are connected to 3.3v on the ESP32, which means that we need to adjust the reading to the 3.3v range in order to get a correct reading. 
+
 ```python
 def adjust_analog_reading(value):  # Convert voltage range to 3.3v
     return (value * 3.3) / 1024
@@ -93,8 +92,6 @@ def adjust_analog_reading(value):  # Convert voltage range to 3.3v
 
 
 ## Explain your code!
-
-Transmitting the data / connectivity
 
 Right now data is sent once per minute, but this resolution can be increaserd as long as it complies with the Adafruit max rate.
 
@@ -108,9 +105,20 @@ The device is placed within range of the router, so no additional consideration 
 
 Describe the presentation part. How is the dashboard built? How long is the data preserved in the database?
 
+Data policy by Adafruit is as follows: 
+
+* Each feed stores data for 30 days.
+* You can write data to the system, across all feeds, up to 60 times per minute. Data creating, updating, and deleting all count against the limit.
+* You may read your data an unlimited amount of time, as long as you remain within the throttle times.
+* 10k rows of "Activity" data is maintained. Activity data just tracks the last actions of your IO account on your Activities page for your information
+
+![Dashboard layout withou data](images/dashboard_nodata.png)
+There is as of now no automation for the data. However, one could use perhaps IFTTT to send a notification to your phone when the UV index is below or above a set threshhold, to notifiy the user if it's time to go put on sun screen. 
+
     Provide visual examples on how the dashboard looks. Pictures needed.
     How often is data saved in the database.
     *Explain your choice of database.
     *Automation/triggers of the data.
+
 
 ## Finalizing the design
