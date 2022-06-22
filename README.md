@@ -83,7 +83,7 @@ while True:
 ```
 However, this version resulted in [Errno 12] ENOMEM errors, indicating that the ESP-32 has run out of RAM, causing the post requests to the Adafruit IO feed to fail randomly. This could be solved by using http requests instead of https (since connections using SSL take up a lot more memory), but given that security is a prominent issue in IoT devices, I felt compelled to find another solution. 
 
-A more scaled down version was created, which works just fine (but actually with an added feature;the addition of an OLED display that was used during troubleshooting, which I actually thought was a nice feature to have, to display the current UV index in proximity to the device.)
+A more scaled down version was created, which works just fine (but actually with an added feature; the addition of an OLED display that was used during troubleshooting, which I actually thought was a nice feature to have, to display the current UV index in proximity to the device.)
 
 ```python
 ################################### MAIN ##############################################
@@ -164,7 +164,7 @@ There is as of now no automation for the data. However, one could use perhaps IF
 The data for these examples was gathered during a cloudy day, which is of course very shocking for summers in Sweden... But given that a sunny day shows up, I will add data for that day as well. 
 
 ## Finalizing the design
-To make the project more of a "finished product", I threw together a quick case for it in Fusion360 - but the extruder on my 3D-printer broke, so I was unable to print it, and therefore stopped refining it. The .stl file is available in the repository if anybody want to try it out.
+To make the project more of a "finished product", I threw together a quick case for it in Fusion360 - but the extruder on my 3D-printer broke, so I was unable to print it, and therefore stopped refining it. The .stl file is available in the repository if anybody wants to try it out.
 
 Early version
 
