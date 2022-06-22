@@ -3,7 +3,7 @@
 #### Internet connected UV sensor
 #### mf223xv
 
-This device uses two UV sensors to gather UV-index data and sends it to a dashboard on adafruit.io, to visualize it using a gauge and a plot.
+This device uses two UV sensors to gather UV-index data and sends it to a dashboard on adafruit.io, to visualize it using a gauge and a line chart.
 
 Given that the the code for this project is open source, constructing a barebones (i.e not 3D-printed case) version of something like this should not take very long, apx 30 minutes if the user has some knowledge of microcontrollers.
 
@@ -41,7 +41,9 @@ I used Windows 11 for development in this course and did not have to install any
 
 ## Putting everything together
 Connect VCC to 3.3v and GND to GND, and the data pin to an analog pin on the ESP-32 (I used pin 32 and 34).
+
  <img src="images/diagram.png" width="500" height="500"/>
+ 
 ## Platform
 
 I opted for the Adafruit IO platform, as it was free, easy to set up, and had all the features I needed for the project.
@@ -49,8 +51,6 @@ I opted for the Adafruit IO platform, as it was free, easy to set up, and had al
 I looked at PyBites but as I'm not using a PyCom device, I did not see any added value from using their platform over Adafruits.
 
 ## The code
-
-Import core functions of your code here, and don’t forget to explain what you have done! Do not put too much code here, focus on the core functionalities. Have you done a specific function that does a calculation, or are you using clever function for sending data on two networks? Or, are you checking if the value is reasonable etc. Explain what you have done, including the setup of the network, wireless, libraries and all that is needed to understand.
 
 This is basically the entire program, which runs indefinitely until the power is switched off. 
 
@@ -68,12 +68,19 @@ while True:
 
         uv_avg = (uv_analog_value_a + uv_analog_value_b) / 2  # Get average of both readings
 
-        if send_value_to_adafruit_feed(uv_avg, UV_INDEX_FEED):  # Finally, send the collected sensor data to Adafruit IO
-            led_alert()  # Blink if successful
-            time.sleep(PRE_DEEPSLEEP_DELAY)  # Sleep before deepsleep to avoid weird states
+        if 0 < uv_avg < 11:  # if the value is outside this range, something has gone wrong
+            if send_value_to_adafruit_feed(uv_avg,
+                                           UV_INDEX_FEED):  # Finally, send the collected sensor data to Adafruit IO
+
+                led_alert()  # Blink once if successful
+                time.sleep(PRE_DEEPSLEEP_DELAY)  # Sleep before deepsleep to avoid weird states
+        else:
+            led_alert()  # This will only be reached if something has gone wrong with the readings. Flash LED once and try again. 
+            continue
 
     machine.deepsleep(
         (RESOLUTION - PRE_DEEPSLEEP_DELAY) * 1000)  # To conserve energy we can use deepsleep (deepsleep is in ms)
+
 ```
 
 At the beginning, you can see that the WiFi functionality is set up (connecting to a chosen SSID with a supplied password).
@@ -82,9 +89,7 @@ Then, a time server is queried to adjust the time of the ESP32, which is used to
 
 The sensors are then read (they are in fact connected to the analog pins, and return a specific voltage depending on the measured UV level)
 
-![UV Index](https://i1.wp.com/www.esp32learning.com/wp-content/uploads/2017/12/UV_index.png?resize=696%2C522)
-
-
+ <img src="images/uv_index.jpg" width="670" height="500"/>
 
 The UV sensors are connected to 3.3v on the ESP32, which means that we need to adjust the reading to the 3.3v range in order to get a correct reading. 
 
@@ -96,17 +101,19 @@ def adjust_analog_reading(value):  # Convert voltage range to 3.3v
 
 ## Explain your code!
 
-Right now data is sent once per minute, but this resolution can be increaserd as long as it complies with the Adafruit max rate.
+Right now data is sent once every 7 seconds, but this resolution can be increased as long as it complies with the Adafruit max rate (60 queries per minute).
 
 It uses WiFi, as the ESP-32 has support for it. MQTT could have been used to first relay the data to a Raspberry Pi running an MQTT server, but since no treatment of data is done locally, this was not used.
 
-I'm using the ESP32 deep sleep functionality to not use as much power when idle. The device is connected to a net adapter in a wall wart so this was done to just eliminate wasteful use of energy.
+I'm using the ESP-32 deep sleep functionality to not use as much power when idle. The device is connected to a net adapter in a wall socket and does not really need any further power consumption optimization - this was just done to eliminate wasteful use of energy.
 
-The device is placed within range of the router, so no additional consideration of device range was needed.
+The device is placed within range of the router, so no additional consideration of device range was needed in this case.
 
 ## Presenting the data
 
 Describe the presentation part. How is the dashboard built? How long is the data preserved in the database?
+
+The dashboard is built using Adafruit IO, and it consists of a gauge, and a line chart. More blocks can be added, but these blocks were the ones I felt were most suitable. 
 
 Data policy by Adafruit is as follows: 
 
@@ -115,8 +122,10 @@ Data policy by Adafruit is as follows:
 * You may read your data an unlimited amount of time, as long as you remain within the throttle times.
 * 10k rows of "Activity" data is maintained. Activity data just tracks the last actions of your IO account on your Activities page for your information
 
-![Dashboard layout withou data](images/dashboard_nodata.png)
 There is as of now no automation for the data. However, one could use perhaps IFTTT to send a notification to your phone when the UV index is below or above a set threshhold, to notifiy the user if it's time to go put on sun screen. 
+
+![Dashboard layout with data](images/dashboard_withdata.png "Dashboard layout with data")
+![Dashboard layout with data](images/dashboard_dark_withdata.png "Dashboard layout with data")
 
     Provide visual examples on how the dashboard looks. Pictures needed.
     How often is data saved in the database.
@@ -125,3 +134,8 @@ There is as of now no automation for the data. However, one could use perhaps IF
 
 
 ## Finalizing the design
+To make the project more of a "finished product", I threw together a quick case for it in Fusion360 - but the extruder on my 3D-printer broke, so I was unable to print it, and therefore stopped refining it. The .stl file is available in the repository if anybody want to try it out.
+
+ <img src="images/box_1.jpg" width="600" height="400"/>
+ 
+ <img src="images/box_2.jpg" width="600" height="400"/>
