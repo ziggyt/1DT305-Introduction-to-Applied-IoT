@@ -165,7 +165,7 @@ The data for these examples was gathered during a cloudy day, which is of course
 ## Finalizing the design
 To make the project more of a "finished product", I threw together a quick case for it in Fusion360 - but the extruder on my 3D-printer broke, so I was unable to print it, and therefore stopped refining it. The .stl file is available in the repository if anybody want to try it out.
 
- <img src="images/poc_device.png" width="600" height="400"/>
+ <img src="images/poc_device.png" width="748" height="1220"/>
 
  <img src="images/box_1.png" width="600" height="400"/>
  
