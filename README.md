@@ -169,8 +169,11 @@ To make the project more of a "finished product", I threw together a quick case 
 Early version
 
  <img src="images/poc_device.png" width="374" height="610"/>
+ 
 
 Box made using Fusion 360
+
  <img src="images/box_1.png" width="600" height="400"/>
+ 
  
  <img src="images/box_2.png" width="600" height="400"/>
