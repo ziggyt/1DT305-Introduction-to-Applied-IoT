@@ -7,7 +7,6 @@ This device uses two UV sensors to gather UV-index data and sends it to a dashbo
 
 Given that the the code for this project is open source, constructing a barebones (i.e not 3D-printed case) version of something like this should not take very long, apx 30 minutes if the user has some knowledge of microcontrollers.
 
-
 ## Objective
 I chose this project because excessive sun exposure can cause health concerns, and the hope is that knowing the UV-index, the user can take this into consideration when outdoors.
 
@@ -82,10 +81,34 @@ while True:
         (RESOLUTION - PRE_DEEPSLEEP_DELAY) * 1000)  # To conserve energy we can use deepsleep (deepsleep is in ms)
 
 ```
+However, this version resulted in [Errno 12] ENOMEM errors, indicating that the ESP-32 has run out of RAM, causing the post requests to the Adafruit IO feed to fail randomly. This could be solved by using http requests instead of https (since connections using SSL take up a lot more memory), but given that security is a prominent issue in IoT devices, I felt compelled to find another solution. 
 
+A more scaled down version was created, which works just fine (but actually with an added feature;the addition of an OLED display that was used during troubleshooting, which I actually thought was a nice feature to have, to display the current UV index in proximity to the device.)
+
+```python
+################################### MAIN ##############################################
+
+setup_wifi()  # Pre-req
+
+while True:
+    gc.collect()  # To avoid ENOMEM errors
+    gc.threshold(gc.mem_free() // 4 + gc.mem_alloc())  # To avoid ENOMEM errors
+
+    uv_analog_value_a = adjust_analog_reading(uv_sensor_a.read())  # Read sensors
+    uv_analog_value_b = adjust_analog_reading(uv_sensor_b.read())
+
+    uv_avg = (uv_analog_value_a + uv_analog_value_b) / 2  # Get average of both readings
+    
+    show_msg(f'UV Index: {uv_avg}')  # Show measured value on the OLED display
+
+    if send_value_to_adafruit_feed(uv_avg, UV_INDEX_FEED):  # Finally, send the collected sensor data to Adafruit IO
+        led_alert()  # Blink once if successful
+
+    sleep(PRE_DEEPSLEEP_DELAY)  # Sleep before deepsleep to avoid weird states
+    deepsleep((RESOLUTION - PRE_DEEPSLEEP_DELAY) * 1000)  # To conserve energy we can use deepsleep
+    
+```
 At the beginning, you can see that the WiFi functionality is set up (connecting to a chosen SSID with a supplied password).
-
-Then, a time server is queried to adjust the time of the ESP32, which is used to not send data to Adafruit IO when the UV is surely low enough to not need to be taken into consideration. This is of course optional, but I saw no value in collecting this data, for the purpose of this project. 
 
 The sensors are then read (they are in fact connected to the analog pins, and return a specific voltage depending on the measured UV level)
 
@@ -98,7 +121,19 @@ def adjust_analog_reading(value):  # Convert voltage range to 3.3v
     return (value * 3.3) / 1024
 ```
 
+And this is the functionality that finally sends the data from the device to the Adafruit IO dashboard. 
+```python
+def send_value_to_adafruit_feed(value, feed_name: str):
+    url = f'https://io.adafruit.com/api/v2/{ADAFRUIT_IO_USERNAME}/feeds/{feed_name}/data'
+    body = {'value': str(value)}
+    headers = {'X-AIO-Key': ADAFRUIT_IO_KEY, 'Content-Type': 'application/json'}
 
+    try:
+        requests.post(url, json=body, headers=headers)
+        return True
+    except Exception as e:
+        print(e)
+```
 ## Explain your code!
 
 Right now data is sent once every 7 seconds, but this resolution can be increased as long as it complies with the Adafruit max rate (60 queries per minute).
@@ -111,9 +146,7 @@ The device is placed within range of the router, so no additional consideration 
 
 ## Presenting the data
 
-Describe the presentation part. How is the dashboard built? How long is the data preserved in the database?
-
-The dashboard is built using Adafruit IO, and it consists of a gauge, and a line chart. More blocks can be added, but these blocks were the ones I felt were most suitable. 
+The dashboard is built using Adafruit IO, and it consists of a gauge, and a line chart. Different types of blocks can be added, but these blocks were the ones I felt were most suitable. 
 
 Data policy by Adafruit is as follows: 
 
@@ -127,15 +160,13 @@ There is as of now no automation for the data. However, one could use perhaps IF
 ![Dashboard layout with data](images/dashboard_withdata.png "Dashboard layout with data")
 ![Dashboard layout with data](images/dashboard_dark_withdata.png "Dashboard layout with data")
 
-    Provide visual examples on how the dashboard looks. Pictures needed.
-    How often is data saved in the database.
-    *Explain your choice of database.
-    *Automation/triggers of the data.
-
+The data for these examples was gathered during a cloudy day, which is of course very shocking for summers in Sweden... But given that a sunny day shows up, I will add data for that day as well. 
 
 ## Finalizing the design
 To make the project more of a "finished product", I threw together a quick case for it in Fusion360 - but the extruder on my 3D-printer broke, so I was unable to print it, and therefore stopped refining it. The .stl file is available in the repository if anybody want to try it out.
 
- <img src="images/box_1.jpg" width="600" height="400"/>
+ <img src="images/poc_device.png" width="600" height="400"/>
+
+ <img src="images/box_1.png" width="600" height="400"/>
  
- <img src="images/box_2.jpg" width="600" height="400"/>
+ <img src="images/box_2.png" width="600" height="400"/>
