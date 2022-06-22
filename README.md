@@ -121,7 +121,8 @@ def adjust_analog_reading(value):  # Convert voltage range to 3.3v
     return (value * 3.3) / 1024
 ```
 
-And this is the functionality that finally sends the data from the device to the Adafruit IO dashboard. 
+And this is the functionality that finally sends the data from the device to the Adafruit IO dashboard. It takes a value and a feed name and then constructs a post request (using urequests as requests) to the Adafruit IO API, and sends this data, using ur private key to identify who we are, and that we are allowed to post data to the feed. The key can be seen on the Adafruit IO dashboard.
+
 ```python
 def send_value_to_adafruit_feed(value, feed_name: str):
     url = f'https://io.adafruit.com/api/v2/{ADAFRUIT_IO_USERNAME}/feeds/{feed_name}/data'
@@ -165,8 +166,11 @@ The data for these examples was gathered during a cloudy day, which is of course
 ## Finalizing the design
 To make the project more of a "finished product", I threw together a quick case for it in Fusion360 - but the extruder on my 3D-printer broke, so I was unable to print it, and therefore stopped refining it. The .stl file is available in the repository if anybody want to try it out.
 
+Early version
+
  <img src="images/poc_device.png" width="374" height="610"/>
 
+Box made using Fusion 360
  <img src="images/box_1.png" width="600" height="400"/>
  
  <img src="images/box_2.png" width="600" height="400"/>
