@@ -15,18 +15,12 @@ If data is logged long term-ish, it can give the user a rough idea of the UV exp
 ## Material
 
 #### BOM
-1pc ESP-32 Microcontroller (CH9102X version) 45 SEK including shipping https://www.aliexpress.com/item/1005002410521023.html
 
-  <img src="https://ae01.alicdn.com/kf/S29fbf11c82d64ecba0d72889f196c663o/New-version-ESP32-Development-Board-CH9102X-WiFi-Bluetooth-Ultra-Low-Power-Consumption-Dual-Core-ESP-32.jpg_Q90.jpg" width="400" height="400"/>
-  
-2pc GUVA-S12SD UV Sensors (or alternative UV-sensors) 25 SEK EA https://www.aliexpress.com/item/1005002496494554.html
-
-  <img src="https://ae01.alicdn.com/kf/Hbe0827ec3e64449ead881933f4f7315eC/Original-assembly-GUVA-S12SD-UV-Detection-Sensor-Module-Light-Sensor-240nm-370nm-for-arduino.jpg_Q90.jpg" width="400" height="400"/>
-  
-Assorted lengths of wire (or dupont cables) 40 SEK https://www.aliexpress.com/item/4000203371860.html
-
-  <img src="https://ae01.alicdn.com/kf/Ha9b5a8b365a14428ac40f4ba12868260u/40-120pcs-Dupont-Line-10CM-40Pin-Male-to-Male-Male-to-Female-and-Female-to-Female.jpg_640x640.jpg" width="400" height="400"/>
-  
+| Item                                        | Quantity | Image                                                                                                                                                                                                                   | Price  | Link                                                  |
+|---------------------------------------------|----------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------|-------------------------------------------------------|
+| ESP-32 Microcontroller                      | 1        | <img src="https://ae01.alicdn.com/kf/S29fbf11c82d64ecba0d72889f196c663o/New-version-ESP32-Development-Board-CH9102X-WiFi-Bluetooth-Ultra-Low-Power-Consumption-Dual-Core-ESP-32.jpg_Q90.jpg" width="300" height="300"/> | 45 SEK | https://www.aliexpress.com/item/1005002410521023.html |
+| GUVA-S12SD UV Sensor                        | 2        | <img src="https://ae01.alicdn.com/kf/Hbe0827ec3e64449ead881933f4f7315eC/Original-assembly-GUVA-S12SD-UV-Detection-Sensor-Module-Light-Sensor-240nm-370nm-for-arduino.jpg_Q90.jpg" width="300" height="300"/>            | 25 SEK | https://www.aliexpress.com/item/1005002496494554.html |
+| Assorted lengths of wire (or dupont cables) | 1        | <img src="https://ae01.alicdn.com/kf/Ha9b5a8b365a14428ac40f4ba12868260u/40-120pcs-Dupont-Line-10CM-40Pin-Male-to-Male-Male-to-Female-and-Female-to-Female.jpg_640x640.jpg" width="300" height="300"/>                   | 40 SEK | https://www.aliexpress.com/item/4000203371860.html    |
 
 ##### Optional
 3D printing filament (I used esun PLA) https://www.amazon.se/eSUN-3D-skrivarfilament-Dimensionell-Noggrannhet-3D-tryckmaterial/dp/B07FQ98RNP/?th=1
