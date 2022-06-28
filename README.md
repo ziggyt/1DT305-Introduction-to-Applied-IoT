@@ -3,9 +3,9 @@
 #### Internet connected UV sensor
 #### mf223xv
 
-This device uses two UV sensors to gather UV-index data and sends it to a dashboard on adafruit.io, to visualize it using a gauge and a line chart.
+This device uses two UV sensors to gather UV-index data and sends it to over the internet to a dashboard on adafruit.io, in order to visualize the data using a gauge and a line chart.
 
-Given that the the code for this project is open source, constructing a barebones (i.e not 3D-printed case) version of something like this should not take very long, apx 30 minutes if the user has some knowledge of microcontrollers.
+Given that the the code for this project is open source, constructing a barebones (i.e not 3D-printed case) version of something like this should not take very long, 60-90 minutes should be enough if the user has some previous knowledge of microcontrollers and programming.
 
 ## Objective
 I chose this project because excessive sun exposure can cause health concerns, and the hope is that knowing the UV-index, the user can take this into consideration when outdoors.
@@ -18,8 +18,8 @@ If data is logged long term-ish, it can give the user a rough idea of the UV exp
 
 | Item                                        | Quantity | Image                                                                                                                                                                                                                   | Price  | Link                                                  |
 |---------------------------------------------|----------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------|-------------------------------------------------------|
-| ESP-32 Microcontroller                      | 1        |![](https://ae01.alicdn.com/kf/S29fbf11c82d64ecba0d72889f196c663o/New-version-ESP32-Development-Board-CH9102X-WiFi-Bluetooth-Ultra-Low-Power-Consumption-Dual-Core-ESP-32.jpg_Q90.jpg) | 45 SEK | https://www.aliexpress.com/item/1005002410521023.html |
-| GUVA-S12SD UV Sensor                        | 2        | <img src="https://ae01.alicdn.com/kf/Hbe0827ec3e64449ead881933f4f7315eC/Original-assembly-GUVA-S12SD-UV-Detection-Sensor-Module-Light-Sensor-240nm-370nm-for-arduino.jpg_Q90.jpg" width="150" height="150"/>            | 25 SEK | https://www.aliexpress.com/item/1005002496494554.html |
+| ESP-32 Microcontroller                      | 1        | <img src="https://ae01.alicdn.com/kf/S29fbf11c82d64ecba0d72889f196c663o/New-version-ESP32-Development-Board-CH9102X-WiFi-Bluetooth-Ultra-Low-Power-Consumption-Dual-Core-ESP-32.jpg_Q90.jpg" width="150" height="150"/> | 45 SEK | https://www.aliexpress.com/item/1005002410521023.html |
+| GUVA-S12SD UV Sensor                        | At least 1        | <img src="https://ae01.alicdn.com/kf/Hbe0827ec3e64449ead881933f4f7315eC/Original-assembly-GUVA-S12SD-UV-Detection-Sensor-Module-Light-Sensor-240nm-370nm-for-arduino.jpg_Q90.jpg" width="150" height="150"/>            | 25 SEK | https://www.aliexpress.com/item/1005002496494554.html |
 | Assorted lengths of wire (or dupont cables) | 1        | <img src="https://ae01.alicdn.com/kf/Ha9b5a8b365a14428ac40f4ba12868260u/40-120pcs-Dupont-Line-10CM-40Pin-Male-to-Male-Male-to-Female-and-Female-to-Female.jpg_640x640.jpg" width="150" height="150"/>                   | 40 SEK | https://www.aliexpress.com/item/4000203371860.html    |
 
 
@@ -33,10 +33,25 @@ I chose PyCharm as I have previous experience with this IDE, and it is free with
 
 I used Windows 11 for development in this course and did not have to install any extra drivers.
 
+To setup the ESP-32 for usage with MicroPython, refer to this official guide: https://docs.micropython.org/en/latest/esp32/tutorial/intro.html.
+
+Use the device manager on Windows to find what COM port to use (COM11 in my case).
+
+
+![ Image not found: images/devicemanager.png ](images/devicemanager.png " Image not found: images/devicemanager.png ")
+
+
+Don't forget to select the correct port in PyCharm, in order to be able to flash the files.
+
+![](images/pycharm.png)
+
+![](images/pycharm2.png)
 ## Putting everything together
-Connect VCC to 3.3v and GND to GND, and the data pin to an analog pin on the ESP-32 (I used pin 32 and 34).
+Connect VCC to 3.3v and GND to GND, and the data pin to an analog pin on the ESP-32 (I used pin 32 and 34 for the UV sensors).
 
  <img src="images/diagram.png" width="500" height="500"/>
+ 
+ I'm using two UV sensors in order to get an average reading between the two of them, with the hopes of increasing accuracy
  
 ## Platform
 
