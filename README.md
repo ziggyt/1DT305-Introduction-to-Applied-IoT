@@ -1,6 +1,6 @@
 # 1DT305-Introduction-to-Applied-IoT
 
-#### Internet connected UV sensor
+#### Internet connected UV sensor and data logging 
 #### mf223xv
 
 This device uses two UV sensors to gather UV-index data and sends it to over the internet to a dashboard on adafruit.io, in order to visualize the data using a gauge and a line chart.
@@ -33,6 +33,8 @@ I chose PyCharm as I have previous experience with this IDE, and it is free with
 
 I used Windows 11 for development in this course and did not have to install any extra drivers.
 
+Download and install Python 3 from https://www.python.org/downloads/windows/
+
 To setup the ESP-32 for usage with MicroPython, refer to this official guide: https://docs.micropython.org/en/latest/esp32/tutorial/intro.html.
 
 Use the device manager on Windows to find what COM port to use (COM11 in my case).
@@ -47,19 +49,20 @@ Don't forget to select the correct port in PyCharm, in order to be able to flash
 
 ![](images/pycharm2.png)
 ## Putting everything together
-Connect VCC to 3.3v and GND to GND, and the data pin to an analog pin on the ESP-32 (I used pin 32 and 34 for the UV sensors).
+Connect VCC to 3.3v and GND to GND, and the data pin to an analog pin on the ESP-32 (I used pin 32 and 34 for the UV sensors). I used F-F dupont cables for this while prototyping, but a breadboard would also work great.
 
  <img src="images/diagram.png" width="500" height="500"/>
  
- I'm using two UV sensors in order to get an average reading between the two of them, with the hopes of increasing accuracy
+ I'm using two UV sensors in order to get an average reading between the two of them, with the hopes of increasing accuracy. 
  
 ## Platform
 
-I opted for the Adafruit IO platform, as it was free, easy to set up, and had all the features I needed for the project.
+I opted for the Adafruit IO platform (which is **cloud** hosted), as it was free, easy to set up, and had all the features I needed for the project.
 
 I looked at PyBites but as I'm not using a PyCom device, I did not see any added value from using their platform over Adafruits.
 
 ## The code
+The [full python code](https://github.com/ziggyt/1DT305-Introduction-to-Applied-IoT/blob/main/main.py) is available in this repository - but snippets of the more crucial parts are provided below.
 
 This is basically the entire program, which runs indefinitely until the power is switched off. 
 
@@ -91,7 +94,7 @@ while True:
         (RESOLUTION - PRE_DEEPSLEEP_DELAY) * 1000)  # To conserve energy we can use deepsleep (deepsleep is in ms)
 
 ```
-However, this version resulted in [Errno 12] ENOMEM errors, indicating that the ESP-32 has run out of RAM, causing the post requests to the Adafruit IO feed to fail randomly. This could be solved by using http requests instead of https (since connections using SSL take up a lot more memory), but given that security is a prominent issue in IoT devices, I felt compelled to find another solution. 
+**However**, this version resulted in [Errno 12] ENOMEM errors, indicating that the ESP-32 has run out of RAM, causing the post requests to the Adafruit IO feed to fail randomly. This could be solved by using http requests instead of https (since connections using SSL take up a lot more memory), but given that security is a prominent issue in IoT devices, I felt compelled to find another solution. 
 
 A more scaled down version was created, which works just fine (but actually with an added feature; the addition of an OLED display that was used during troubleshooting, which I actually thought was a nice feature to have, to display the current UV index in proximity to the device.)
 
@@ -147,9 +150,9 @@ def send_value_to_adafruit_feed(value, feed_name: str):
 ```
 ## Explain your code!
 
-Right now data is sent once every 7 seconds, but this resolution can be increased as long as it complies with the Adafruit max rate (60 queries per minute).
+Right now data is sent **once every 7 seconds**, but this resolution can be increased as long as it complies with the Adafruit max rate (60 queries per minute).
 
-It uses WiFi, as the ESP-32 has support for it. MQTT could have been used to first relay the data to a Raspberry Pi running an MQTT server, but since no treatment of data is done locally, this was not used.
+It uses **WiFi**, as the ESP-32 has support for it. MQTT could have been used to first relay the data to a Raspberry Pi running an MQTT server, but since no treatment of data is done locally, this was not used.
 
 I'm using the ESP-32 deep sleep functionality to not use as much power when idle. The device is connected to a net adapter in a wall socket and does not really need any further power consumption optimization - this was just done to eliminate wasteful use of energy.
 
@@ -157,7 +160,7 @@ The device is placed within range of the router, so no additional consideration 
 
 ## Presenting the data
 
-The dashboard is built using Adafruit IO, and it consists of a gauge, and a line chart. Different types of blocks can be added, but these blocks were the ones I felt were most suitable. 
+The dashboard is built using **Adafruit IO**, and it consists of a **gauge**, and a **line chart**. Different types of blocks can be added, but these blocks were the ones I felt were most suitable. 
 
 Data policy by Adafruit is as follows: 
 
@@ -187,3 +190,5 @@ Box made using Fusion 360
  
  
  <img src="images/box_2.png" width="600" height="400"/>
+
+I think that the project went well and I had fun while doing it - but there is of course always room for improvement. An ESP-32 with more RAM would have resolved a few of my issues and made it possible to include more features in the product. It would also have been really nice if my 3D-printer would have been up and running, to see how a more finished product would have looked like. 
