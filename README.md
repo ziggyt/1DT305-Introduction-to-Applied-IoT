@@ -179,6 +179,8 @@ The data for these examples was gathered during a cloudy day, which is of course
 ## Finalizing the design
 To make the project more of a "finished product", I threw together a quick case for it in Fusion360 - but the extruder on my 3D-printer broke, so I was unable to print it, and therefore stopped refining it. The .stl file is available in the repository if anybody wants to try it out.
 
+I think that the project went well and I had fun while doing it - but there is of course always room for improvement. An ESP-32 with more RAM would have resolved a few of my issues and made it possible to include more features in the product. It would also have been really nice if my 3D-printer would have been up and running, to see how a more finished product would have looked like. 
+
 Early version
 
  <img src="images/poc_device.png" width="374" height="610"/>
@@ -191,4 +193,3 @@ Box made using Fusion 360
  
  <img src="images/box_2.png" width="600" height="400"/>
 
-I think that the project went well and I had fun while doing it - but there is of course always room for improvement. An ESP-32 with more RAM would have resolved a few of my issues and made it possible to include more features in the product. It would also have been really nice if my 3D-printer would have been up and running, to see how a more finished product would have looked like. 
