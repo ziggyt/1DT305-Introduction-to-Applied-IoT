@@ -16,11 +16,11 @@ If data is logged long term-ish, it can give the user a rough idea of the UV exp
 
 #### BOM
 
-| Item                                        | Quantity | Image                                                                                                                                                                                                                   | Price  | Link                                                  |
-|---------------------------------------------|----------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------|-------------------------------------------------------|
-| ESP-32 Microcontroller                      | 1        | <img src="https://ae01.alicdn.com/kf/S29fbf11c82d64ecba0d72889f196c663o/New-version-ESP32-Development-Board-CH9102X-WiFi-Bluetooth-Ultra-Low-Power-Consumption-Dual-Core-ESP-32.jpg_Q90.jpg" width="150" height="150"/> | 45 SEK | https://www.aliexpress.com/item/1005002410521023.html |
-| GUVA-S12SD UV Sensor                        | At least 1        | <img src="https://ae01.alicdn.com/kf/Hbe0827ec3e64449ead881933f4f7315eC/Original-assembly-GUVA-S12SD-UV-Detection-Sensor-Module-Light-Sensor-240nm-370nm-for-arduino.jpg_Q90.jpg" width="150" height="150"/>            | 25 SEK | https://www.aliexpress.com/item/1005002496494554.html |
-| Assorted lengths of wire (or dupont cables) | 1        | <img src="https://ae01.alicdn.com/kf/Ha9b5a8b365a14428ac40f4ba12868260u/40-120pcs-Dupont-Line-10CM-40Pin-Male-to-Male-Male-to-Female-and-Female-to-Female.jpg_640x640.jpg" width="150" height="150"/>                   | 40 SEK | https://www.aliexpress.com/item/4000203371860.html    |
+| Item                                        | Image                                                                                                                                                                                                                   | Price  | Link                                                  |
+|---------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------|-------------------------------------------------------|
+| ESP-32 Microcontroller                      | <img src="https://ae01.alicdn.com/kf/S29fbf11c82d64ecba0d72889f196c663o/New-version-ESP32-Development-Board-CH9102X-WiFi-Bluetooth-Ultra-Low-Power-Consumption-Dual-Core-ESP-32.jpg_Q90.jpg" width="150" height="150"/> | 45 SEK | https://www.aliexpress.com/item/1005002410521023.html |
+| GUVA-S12SD UV Sensor                        | <img src="https://ae01.alicdn.com/kf/Hbe0827ec3e64449ead881933f4f7315eC/Original-assembly-GUVA-S12SD-UV-Detection-Sensor-Module-Light-Sensor-240nm-370nm-for-arduino.jpg_Q90.jpg" width="150" height="150"/>            | 25 SEK | https://www.aliexpress.com/item/1005002496494554.html |
+| Assorted lengths of wire (or dupont cables) | <img src="https://ae01.alicdn.com/kf/Ha9b5a8b365a14428ac40f4ba12868260u/40-120pcs-Dupont-Line-10CM-40Pin-Male-to-Male-Male-to-Female-and-Female-to-Female.jpg_640x640.jpg" width="150" height="150"/>                   | 40 SEK | https://www.aliexpress.com/item/4000203371860.html    |
 
 
 ##### Optional
@@ -177,9 +177,9 @@ There is as of now no automation for the data. However, one could use perhaps IF
 The data for these examples was gathered during a cloudy day, which is of course very shocking for summers in Sweden... But given that a sunny day shows up, I will add data for that day as well. 
 
 ## Finalizing the design
-To make the project more of a "finished product", I threw together a quick case for it in Fusion360 - but the extruder on my 3D-printer broke, so I was unable to print it, and therefore stopped refining it. The .stl file is available in the repository if anybody wants to try it out.
-
 I think that the project went well and I had fun while doing it - but there is of course always room for improvement. An ESP-32 with more RAM would have resolved a few of my issues and made it possible to include more features in the product. It would also have been really nice if my 3D-printer would have been up and running, to see how a more finished product would have looked like. 
+
+To make the project more of a "finished product", I threw together a quick case for it in Fusion360 - but the extruder on my 3D-printer broke, so I was unable to print it, and therefore stopped refining it. The .stl file is available in the repository if anybody wants to try it out.
 
 Early version
 
