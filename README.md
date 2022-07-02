@@ -174,7 +174,7 @@ There is as of now no automation for the data. However, one could use perhaps IF
 ![Dashboard layout with data](images/dashboard_withdata.png "Dashboard layout with data")
 ![Dashboard layout with data](images/dashboard_dark_withdata.png "Dashboard layout with data")
 
-The data for these examples was gathered during a cloudy day, which is of course very shocking for summers in Sweden... But given that a sunny day shows up, I will add data for that day as well. 
+The data for these examples was gathered during a cloudy day, which is of course very shocking for summers in Sweden..
 
 ## Finalizing the design
 I think that the project went well and I had fun while doing it - but there is of course always room for improvement. An ESP-32 with more RAM would have resolved a few of my issues and made it possible to include more features in the product. It would also have been really nice if my 3D-printer would have been up and running, to see how a more finished product would have looked like. 
